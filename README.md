@@ -8,6 +8,9 @@ Author: Alexander Panov <panov@royalzsoftware.de>
 This is intended to be a micro library to create forms with select fields that
 change based on the selection of forms value
 
+## Demo
+![Demo video](./resources/demo.mov)
+
 ## Terminology
 - A `form` is not just the html form, but it also contains a state TODO
 - A `filter select field` is a select field that reevaluates the select options
