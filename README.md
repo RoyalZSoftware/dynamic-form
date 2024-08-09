@@ -9,7 +9,7 @@ This is intended to be a micro library to create forms with select fields that
 change based on the selection of forms value
 
 ## Demo
-![Demo video](./resources/demo.mov)
+![Demo video](./resources/demo.gif)
 
 ## Terminology
 - A `form` is not just the html form, but it also contains a state TODO
