@@ -63,8 +63,6 @@ function initializeForm(element) {
 
     const reevaluate = () => {
         dependentSelectFields.forEach((selectField) => {
-            selectField.selectedIndex = -1;
-            formValues[selectField.getAttribute('name')] = "";
             Array.from(selectField.options).forEach((option) => {
                 const attributes = option.getAttributeNames();
                 
@@ -79,20 +77,12 @@ function initializeForm(element) {
                     option.style.display = 'none';
                 }
             });
+            if (selectField.selectedOptions[0] && selectField.selectedOptions[0].style.display === 'none') {
+                selectField.selectedIndex = 0;
+                formValues[selectField.getAttribute('name')] = "";
+            }
         });
     };
-
-    selectFields.forEach((selectField) => {
-        selectField.addEventListener('change', (event) => {
-            console.debug(event);
-            const name = event.target.getAttribute('name');
-            formValues[name] = event.target.value;
-            element.dispatchEvent(new CustomEvent('change', {detail: {
-                formValues,
-                selectFields,
-            }}));
-        })
-    });
 
     filterSelectFields.forEach((selectField) => {
         selectField.addEventListener('change', (event) => {
@@ -102,6 +92,21 @@ function initializeForm(element) {
             reevaluate();
         })
     });
+
+    selectFields.forEach((selectField) => {
+        selectField.addEventListener('change', (event) => {
+            console.debug(event);
+            const name = event.target.getAttribute('name');
+            formValues[name] = event.target.value;
+            element.dispatchEvent(new CustomEvent('change', {detail: {
+                formValues,
+                selectedOptions: selectFields.map(c => c.selectedOptions[0]),
+            }}));
+        })
+    });
+
+    filter[selectFields[0].name] = selectFields[0].options[0].value;
+    reevaluate();
 }
 
 function initializeForms() {
