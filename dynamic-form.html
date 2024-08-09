@@ -1,0 +1,24 @@
+<html>
+    <body>
+        <div dyn-form>
+            <select name="size" dyn-filter>
+                <option value="19">19 zoll</option>
+                <option value="20">20 zoll</option>
+            </select>
+            <select name="color" dyn-dependent>
+                <option value="red" dyn-size="19">Rot</option>
+                <option value="green" dyn-size="19">Grün</option>
+                <option value="blue" dyn-size="20">Blau</option>
+                <option value="red" dyn-size="20">Rot</option>
+            </select>
+            <select name="brand" dyn-dependent>
+                <option value="Continental" dyn-size="19">Continental</option>
+                <option value="Pirelli" dyn-size="19">Pirelli</option>
+                <option value="Bridgestone" dyn-size="20">Bridgestone</option>
+            </select>
+        </div>
+
+        <script src="./dynamic-form.dom.js"></script>
+        <script src="./price-calculator.js"></script>
+    </body>
+</html>
