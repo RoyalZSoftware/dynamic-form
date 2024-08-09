@@ -1,6 +1,7 @@
 # Dynamic Form
 
 Copyright RoyalZSoftware 2024: Dynamic Form
+
 Author: Alexander Panov <panov@royalzsoftware.de>
 
 ## Abstract
