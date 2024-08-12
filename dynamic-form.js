@@ -2,29 +2,16 @@
  * Copyright RoyalZSoftware 2024: Dynamic Form
  * Author: Alexander Panov <panov@royalzsoftware.de>
  * 
- * Abstract:
- *  This is intended to be a micro library to create forms with select fields that
- *  change based on the selection of forms value
- * 
- * Terminology:
- *  - A `form` is not just the html form, but it also contains a state TODO
- *  - A `filter select field` is a select field that triggers a reevaluation of the select options
- * 
- * Requirements:
- *  1. It should be simple
- *  2. There should be an attribute that creates a `form`: `dyn-form`.
- *  3. There should be an attribute that creates a `filter select field`: `dyn-filter`
- *  4. At form initialization it is expected that all select fields are rendered in the DOM.
- *  5. When one of the `filter select field`s changes, then reevaluate the available options
- *     for all the select fields
- *  6. To specify the property of an option, pass the `dyn-*` attribute.
- *  7. It is expected that all the options are rendered as <options> inside the select fields at initialization time.
- *     Those will be hidden or shown depending on the filter.
  */
-
 const QS_FORM = "dyn-form";
-const QS_FILTER_SELECT_FIELDS = "dyn-filter";
+const QS_FILTER_SELECT_FIELD = "dyn-filter";
 
+/**
+ * Check if the attributes of an element match the filter
+ *
+ * @param {{[key: string]: string}} attributes
+ * @param {{[key: string]: string}} filter
+ */
 function matches(attributes, filter) {
     console.debug(filter);
     return Object.keys(filter).map((k) => {
@@ -43,7 +30,7 @@ function matches(attributes, filter) {
 }
 
 /**
- * 
+ * Setup the event listeners for all the select fields
  * @param {HTMLElement} element 
  */
 function initializeForm(element) {
