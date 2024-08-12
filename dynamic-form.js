@@ -40,8 +40,6 @@ function initializeForm(element) {
     // find all selects
     const selectFields = Array.from(element.querySelectorAll('select'));
 
-    const filterSelectFields = selectFields.filter(c => c.getAttributeNames().includes(QS_FILTER_SELECT_FIELDS));
-
     const reevaluate = () => {
         selectFields.forEach((selectField) => {
             Array.from(selectField.options).forEach((option) => {
@@ -65,19 +63,14 @@ function initializeForm(element) {
         });
     };
 
-    filterSelectFields.forEach((selectField) => {
-        selectField.addEventListener('change', (event) => {
-            const name = event.target.getAttribute('name');
-            filter[name] = event.target.value;
-            console.debug(filter);
-            reevaluate();
-        })
-    });
-
     selectFields.forEach((selectField) => {
         selectField.addEventListener('change', (event) => {
-            console.debug(event);
             const name = event.target.getAttribute('name');
+            if (selectField.hasAttribute(QS_FILTER_SELECT_FIELD)) {
+                filter[name] = event.target.value;
+                console.debug(filter);
+                reevaluate();
+            }
             formValues[name] = event.target.value;
             element.dispatchEvent(new CustomEvent('change', {detail: {
                 formValues,
