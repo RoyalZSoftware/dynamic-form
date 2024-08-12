@@ -8,27 +8,22 @@
  * 
  * Terminology:
  *  - A `form` is not just the html form, but it also contains a state TODO
- *  - A `filter select field` is a select field that reevaluates the select options
- *    of all the select fields inside a `form`
- *  - A `dependent select field` is a select field that does not trigger a reevaluation
- *    of the options when its value changes
+ *  - A `filter select field` is a select field that triggers a reevaluation of the select options
  * 
  * Requirements:
  *  1. It should be simple
  *  2. There should be an attribute that creates a `form`: `dyn-form`.
  *  3. There should be an attribute that creates a `filter select field`: `dyn-filter`
- *  4. There should be an attribute that creates a `dependent select field`: `dyn-dependent`
- *  5. At form initialization it is expected that all select fields are rendered in the DOM.
- *  6. When one of the `filter select field`s changes, then reevaluate the available options
+ *  4. At form initialization it is expected that all select fields are rendered in the DOM.
+ *  5. When one of the `filter select field`s changes, then reevaluate the available options
  *     for all the select fields
- *  7. To specify the property of an option, pass the `dyn-*` attribute.
- *  8. It is expected that all the options are rendered as <options> inside the select fields at initialization time.
+ *  6. To specify the property of an option, pass the `dyn-*` attribute.
+ *  7. It is expected that all the options are rendered as <options> inside the select fields at initialization time.
  *     Those will be hidden or shown depending on the filter.
  */
 
 const QS_FORM = "dyn-form";
 const QS_FILTER_SELECT_FIELDS = "dyn-filter";
-const QS_DEPENDENT_SELECT_FIELDS = "dyn-dependent";
 
 function matches(attributes, filter) {
     console.debug(filter);
@@ -59,10 +54,9 @@ function initializeForm(element) {
     const selectFields = Array.from(element.querySelectorAll('select'));
 
     const filterSelectFields = selectFields.filter(c => c.getAttributeNames().includes(QS_FILTER_SELECT_FIELDS));
-    const dependentSelectFields = selectFields.filter(c => c.getAttributeNames().includes(QS_DEPENDENT_SELECT_FIELDS));
 
     const reevaluate = () => {
-        dependentSelectFields.forEach((selectField) => {
+        selectFields.forEach((selectField) => {
             Array.from(selectField.options).forEach((option) => {
                 const attributes = option.getAttributeNames();
                 
