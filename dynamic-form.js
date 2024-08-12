@@ -69,8 +69,8 @@ function initializeForm(element) {
             if (selectField.hasAttribute(QS_FILTER_SELECT_FIELD)) {
                 filter[name] = event.target.value;
                 console.debug(filter);
-                reevaluate();
             }
+            reevaluate();
             formValues[name] = event.target.value;
             element.dispatchEvent(new CustomEvent('change', {detail: {
                 formValues,
