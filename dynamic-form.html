@@ -1,28 +1,32 @@
 <html>
     <body>
         <div dyn-form>
-            <select name="size" dyn-filter>
-                <option>Please select</option>
-                <option value="19" price="480">19 zoll</option>
-                <option value="20" price="540">20 zoll</option>
-            </select>
-            <select name="brand" dyn-filter>
-                <option>Please select</option>
-                <option value="continental" dyn-size="19" price="200">Continental</option>
-                <option value="pirelli" dyn-size="19" price="300">Pirelli</option>
-                <option value="pirelli" dyn-size="20" price="320">Pirelli</option>
-            </select>
-            <select name="color">
-                <option>Please select</option>
-                <option value="rainbow" dyn-size="19" dyn-brand="continental" price="40">Rainbow</option>
-                <option value="rainbow" dyn-size="19" dyn-brand="pirelli" price="40">Rainbow</option>
-                <option value="red" dyn-size="19" price="30">Rot</option>
-                <option value="green" dyn-size="19" price="0">Grün</option>
-                <option value="blue" dyn-size="20" price="0">Blau</option>
-                <option value="red" dyn-size="20" price="30">Rot</option>
-            </select>
+		<h1>Komplettrad</h1>
+ 		<p>Felge: Edelweiß</p>
+		<select name="diameter" dyn-filter dyn-depends-on="">
+			<option>Please select</option>
+		</select>
+		<select name="color" dyn-filter dyn-depends-on="diameter">
+			<option>Please select</option>
+		</select>
         </div>
 
         <script src="./dynamic-form.js"></script>
+	<script type="text/javascript">
+		document.querySelector('[dyn-form]').addEventListener('change', (e) => {
+if(e.detail)
+console.log(e.detail.selectedOptions?.map(c => +c.getAttribute("price") ?? 0).reduce((prev, curr) => prev + curr, 0))
+});
+	</script>
+
+	<ul>
+		<li fe-item fe-color="red" fe-diameter="20"></li>
+		<li fe-item fe-color="red" fe-diameter="21"></li>
+		<li fe-item fe-color="green" fe-diameter="21"></li>
+		<li fe-item fe-color="green" fe-diameter="20"></li>
+		<li fe-item fe-color="blue" fe-diameter="21"></li>
+</ul>
+	<script src="./from-elements.js">
+	</script>
     </body>
 </html>

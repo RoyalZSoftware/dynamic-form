@@ -11,10 +11,11 @@ const QS_FILTER_SELECT_FIELD = "dyn-filter";
  *
  * @param {{[key: string]: string}} attributes
  * @param {{[key: string]: string}} filter
+ * @param {string[]} dependsOn is the array of select field names that this input depends on
  */
-function matches(attributes, filter) {
+function matches(attributes, filter, deps=Object.keys(filter)) {
     console.debug(filter);
-    return Object.keys(filter).map((k) => {
+    return deps.map((k) => {
         const v = filter[k];
         console.debug(k, v, attributes, attributes[k]);
         if (attributes[k] == undefined) {
@@ -27,6 +28,18 @@ function matches(attributes, filter) {
 
         return false;
     }).every(c => c == true);
+}
+
+/**
+ * @returns {undefined | string[]} either undefined if behavior is not set and otherwise an array of the select names
+ */
+function dependsOn(dynDependsOnAttr) {
+	console.log(dynDependsOnAttr);
+	if (dynDependsOnAttr != null) {
+		if (dynDependsOnAttr == "") return [];
+		return dynDependsOnAttr.split(',');
+	}
+	return undefined;
 }
 
 /**
@@ -44,6 +57,9 @@ function initializeForm(element) {
         selectFields.forEach((selectField) => {
             Array.from(selectField.options).forEach((option) => {
                 const attributes = option.getAttributeNames();
+		const dependsOnAttr = selectField.getAttribute("dyn-depends-on")
+		const deps = dependsOn(dependsOnAttr);
+		console.log(deps);
                 
                 const attributeMap = attributes.reduce((prev, curr) => {
                     prev[curr.replace('dyn-', '')] = option.getAttribute(curr);
@@ -52,7 +68,7 @@ function initializeForm(element) {
 
                 option.style.display = 'block';
 
-                if (!matches(attributeMap, filter)) {
+                if (!matches(attributeMap, filter, deps)) {
                     option.style.display = 'none';
                 }
             });
