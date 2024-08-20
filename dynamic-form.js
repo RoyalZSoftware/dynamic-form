@@ -34,7 +34,7 @@ function matches(attributes, filter, deps=Object.keys(filter)) {
  * @returns {undefined | string[]} either undefined if behavior is not set and otherwise an array of the select names
  */
 function dependsOn(dynDependsOnAttr) {
-	console.log(dynDependsOnAttr);
+	console.debug(dynDependsOnAttr);
 	if (dynDependsOnAttr != null) {
 		if (dynDependsOnAttr == "") return [];
 		return dynDependsOnAttr.split(',');
@@ -55,21 +55,23 @@ function initializeForm(element) {
 
     const reevaluate = () => {
         selectFields.forEach((selectField) => {
+	    let visibleFields = [];
             Array.from(selectField.options).forEach((option) => {
                 const attributes = option.getAttributeNames();
 		const dependsOnAttr = selectField.getAttribute("dyn-depends-on")
 		const deps = dependsOn(dependsOnAttr);
-		console.log(deps);
+		console.debug(deps);
                 
                 const attributeMap = attributes.reduce((prev, curr) => {
                     prev[curr.replace('dyn-', '')] = option.getAttribute(curr);
                     return prev;
                 }, {});
 
-                option.style.display = 'block';
+                option.style.display = 'none';
 
-                if (!matches(attributeMap, filter, deps)) {
-                    option.style.display = 'none';
+                if (matches(attributeMap, filter, deps) && !visibleFields.includes(option.value)) {
+                    option.style.display = 'block';
+		    visibleFields.push(option.value);
                 }
             });
             if (selectField.selectedOptions[0] && selectField.selectedOptions[0].style.display === 'none') {

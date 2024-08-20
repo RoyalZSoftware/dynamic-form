@@ -45,12 +45,7 @@ function initialize() {
 		const values = Object.entries(options).find(c => c[0] === select.name)?.[1];
 		if (!values) return;
 
-		const isFirst = i == 0;
-
 		values.forEach((val) => {
-			const isDuplicate = Array.from(select.options).map(c => c.value).includes(val.value)
-			if (isFirst && isDuplicate) return;
-
 			select.add(val)
 		});
 	});

@@ -13,10 +13,6 @@
 
         <script src="./dynamic-form.js"></script>
 	<script type="text/javascript">
-		document.querySelector('[dyn-form]').addEventListener('change', (e) => {
-if(e.detail)
-console.log(e.detail.selectedOptions?.map(c => +c.getAttribute("price") ?? 0).reduce((prev, curr) => prev + curr, 0))
-});
 	</script>
 
 	<ul>
@@ -24,6 +20,7 @@ console.log(e.detail.selectedOptions?.map(c => +c.getAttribute("price") ?? 0).re
 		<li fe-item fe-color="red" fe-diameter="21"></li>
 		<li fe-item fe-color="green" fe-diameter="21"></li>
 		<li fe-item fe-color="green" fe-diameter="20"></li>
+		<li fe-item fe-color="blue" fe-diameter="21"></li>
 		<li fe-item fe-color="blue" fe-diameter="21"></li>
 </ul>
 	<script src="./from-elements.js">
