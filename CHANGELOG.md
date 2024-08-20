@@ -2,6 +2,8 @@
 Follows the keep a changelog convention
 
 ## Unreleased
+
+## [0.3.0] - 2024-08-20
 ### Fixed
 - duplicates are now handled by the dynamic form module, rather than the from element.
 
