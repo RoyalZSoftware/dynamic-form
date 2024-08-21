@@ -2,6 +2,8 @@
 Follows the keep a changelog convention
 
 ## Unreleased
+
+## [0.5.0] - 2024-08-21
 ### Fixed
 - from elements maps attributes from `fe` to `dyn`
 
