@@ -2,6 +2,8 @@
 Follows the keep a changelog convention
 
 ## Unreleased
+
+## [0.4.0] - 2024-08-21
 ### Added
 - log that the script has been implemeted
 
