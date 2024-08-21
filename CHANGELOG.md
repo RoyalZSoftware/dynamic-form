@@ -3,6 +3,10 @@ Follows the keep a changelog convention
 
 ## Unreleased
 
+## [0.6.0] - 2024-08-21
+### Added
+- summary.js
+
 ## [0.5.1] - 2024-08-21
 ### Fixed
 - selection for dynamic form
