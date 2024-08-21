@@ -10,7 +10,7 @@ function createOption(value, displayName, attributes) {
 	const option = document.createElement('option');
 	option.value = value;
 	option.innerHTML = displayName;
-	Object.entries(attributes).forEach((attrKv) => option.setAttribute(attrKv[0], attrKv[1] ?? ''));
+	Object.entries(attributes).forEach((attrKv) => option.setAttribute("dyn-" + attrKv[0], attrKv[1] ?? ''));
 
 	return option;
 }
@@ -30,7 +30,7 @@ function buildOptionsFromPossibleVariations(items) {
 			if (prev[key] == undefined) {
 				prev[key] = [];
 			}
-			prev[key].push(createOption(attributeKv[1], attributeKv[1], Object.entries(attributes).reduce((prev, curr) => {prev["dyn-" + curr[0]] = curr[1]; return prev})));
+			prev[key].push(createOption(attributeKv[1], attributeKv[1], attributes));
 		}, {});
 		return prev;
 	}, {});
