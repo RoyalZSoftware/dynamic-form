@@ -103,7 +103,7 @@ function initializeForm(element) {
 
 function initializeForms() {
     const formElements = document.querySelectorAll('[' + QS_FORM + ']');
-
+    console.log("dynamic-form.js has successfully loaded.");
     for (const formElement of formElements) {
         initializeForm(formElement);
     }

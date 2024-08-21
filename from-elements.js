@@ -36,11 +36,12 @@ function buildOptionsFromPossibleVariations(items) {
 	}, {});
 }
 
-function initialize() {
+function initializeFE() {
 	const items = Array.from(document.querySelectorAll('[fe-item]'));
 	const options = buildOptionsFromPossibleVariations(items);
 	const selects = document.querySelectorAll('select');
-	console.log(options);
+	console.log("from-elements.js has successfully loaded.");
+	console.debug(options);
 	selects.forEach((select, i) => {
 		const values = Object.entries(options).find(c => c[0] === select.name)?.[1];
 		if (!values) return;
@@ -51,4 +52,4 @@ function initialize() {
 	});
 }
 
-initialize();
+initializeFE();

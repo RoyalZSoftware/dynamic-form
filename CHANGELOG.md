@@ -2,6 +2,8 @@
 Follows the keep a changelog convention
 
 ## Unreleased
+### Added
+- log that the script has been implemeted
 
 ## [0.3.0] - 2024-08-20
 ### Fixed
