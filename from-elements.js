@@ -30,7 +30,7 @@ function buildOptionsFromPossibleVariations(items) {
 			if (prev[key] == undefined) {
 				prev[key] = [];
 			}
-			prev[key].push(createOption(attributeKv[1], attributeKv[1], attributes));
+			prev[key].push(createOption(attributeKv[1], attributeKv[1], Object.entries(attributes).reduce((prev, curr) => {prev["dyn-" + curr[0]] = curr[1]; return prev})));
 		}, {});
 		return prev;
 	}, {});

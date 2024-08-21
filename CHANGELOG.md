@@ -2,6 +2,8 @@
 Follows the keep a changelog convention
 
 ## Unreleased
+### Fixed
+- from elements maps attributes from `fe` to `dyn`
 
 ## [0.4.0] - 2024-08-21
 ### Added
